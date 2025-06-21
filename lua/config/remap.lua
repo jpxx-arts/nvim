@@ -13,3 +13,9 @@ vim.keymap.set('n', '<leader>q', function() vim.cmd('q!') end, { noremap = true,
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-BS>', '<C-w>', { noremap = true })
 
+-- Move lines up and down
+vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true, desc = 'Move line down' })
+vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true, desc = 'Move line up' })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move lines down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move lines down" })
+
