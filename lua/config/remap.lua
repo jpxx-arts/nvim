@@ -9,3 +9,7 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>w', vim.cmd.w)
 vim.keymap.set('n', '<leader>q', function() vim.cmd('q!') end, { noremap = true, silent = true })
 
+-- Shortcuts for Insert mode
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-BS>', '<C-w>', { noremap = true })
+
