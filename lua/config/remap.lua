@@ -8,6 +8,7 @@ vim.keymap.set('n', '<C-v>', '"+p', { noremap = true, silent = true, desc = 'Pas
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>w', vim.cmd.w)
 vim.keymap.set('n', '<leader>q', function() vim.cmd('q!') end, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>Q', '<cmd>qa!<CR>', { desc = 'Close nvim completely' })
 
 -- Shortcuts for Insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
