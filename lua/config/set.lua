@@ -30,3 +30,9 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+local preferred_shell = os.getenv("NVIM_PREFERRED_SHELL")
+
+if preferred_shell and vim.fn.executable(preferred_shell) == 1 then
+  vim.opt.shell = preferred_shell
+end
+
