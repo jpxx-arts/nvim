@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/plugins/lsp.lua
 return {
   {
     "neovim/nvim-lspconfig",
@@ -76,26 +75,8 @@ return {
           vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
         end,
       })
-
-      -- 🔠 Configuração do cmp
-      local cmp = require("cmp")
-      cmp.setup({
-        sources = {
-          { name = "nvim_lsp" },
-        },
-        snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body) -- Neovim 0.10+
-          end,
-        },
-        mapping = {
-          ["<Tab>"] = cmp.mapping.select_next_item(),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-Space>"] = cmp.mapping.complete(),
-        },
-      })
     end,
+
     keys = {
       { "<leader>m", "<cmd>Mason<CR>", desc = "Opens Mason" }
     },
