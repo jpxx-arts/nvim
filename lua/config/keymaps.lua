@@ -37,3 +37,7 @@ vim.keymap.set("n", "<leader>th", function()
   vim.cmd("botright split | resize 8 | terminal")
 end, { desc = "Horizontal Terminal" })
 vim.keymap.set("n", "<leader>tv", ":botright vsplit | vertical resize 35 | terminal<CR>", { desc = "Vertical Terminal" })
+
+local floaterminal = require("utils.floaterminal")
+vim.keymap.set("n", "<leader>tt", floaterminal.toggle, { desc = "Toggle floaterminal" })
+vim.keymap.set("t", "jk", "<c-\\><c-n>", { desc = "Exit terminal mode" })
