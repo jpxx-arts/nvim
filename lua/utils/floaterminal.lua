@@ -1,5 +1,3 @@
--- ~/.config/nvim/lua/utils/floaterminal.lua (Versão Corrigida)
-
 local M = {}
 
 local state = {
@@ -34,27 +32,23 @@ local function create_floating_window(opts)
   return { buf = buf, win = win }
 end
 
--- Função que abre e fecha o terminal
 function M.toggle()
-  -- Se a janela não existe, crie-a
   if not vim.api.nvim_win_is_valid(state.floating.win) then
     state.floating = create_floating_window { buf = state.floating.buf }
     
-    -- Se o buffer ainda não for um terminal, o inicializamos
     if vim.bo[state.floating.buf].buftype ~= "terminal" then
-      -- CORREÇÃO: Foca na janela flutuante e então executa o comando :terminal
       vim.api.nvim_set_current_win(state.floating.win)
       vim.cmd.terminal()
     end
+    
+    -- Inicia o modo de inserção apenas ao abrir o terminal.
+    vim.cmd('startinsert')
   else
-    -- Se a janela já existe, apenas a esconda
+    -- Esconde a janela se ela já estiver visível.
     vim.api.nvim_win_hide(state.floating.win)
   end
-  vim.cmd('startinsert')
 end
 
--- Cria o comando de usuário :Floaterminal
 vim.api.nvim_create_user_command("Floaterminal", M.toggle, {})
 
--- Retorna o módulo para que ele possa ser usado em outros arquivos (keymaps)
 return M
