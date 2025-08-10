@@ -41,3 +41,8 @@ vim.keymap.set("n", "<leader>tv", ":botright vsplit | vertical resize 35 | termi
 local floaterminal = require("utils.floaterminal")
 vim.keymap.set("n", "<leader>tt", floaterminal.toggle, { desc = "Toggle floaterminal" })
 vim.keymap.set("t", "jk", "<c-\\><c-n>", { desc = "Exit terminal mode" })
+
+-- New file
+vim.keymap.set("n", "<leader>nj", function()
+  require("utils.java_file_creator").create_java_file()
+end, { desc = "Create a new java file" })
