@@ -7,6 +7,7 @@ return {
       "lua", "vim", "bash", "python", "java", "javascript", "html", "css", "c"
     },
     auto_install = true,
+    ignore_install = { "jsonc" },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
