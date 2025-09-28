@@ -10,13 +10,13 @@ return {
       "windwp/nvim-autopairs",
     },
     config = function()
-      -- 🪟 SignColumn sempre visível
+      -- 🪟 SignColumn always visible
       vim.opt.signcolumn = "yes"
 
-      -- 🧠 Autopairs
+      -- 🧠 Autopairs setup
       require("nvim-autopairs").setup()
 
-      -- 🧰 Mason UI
+      -- 🧰 Mason UI setup
       require("mason").setup({
         ui = {
           icons = {
@@ -27,10 +27,22 @@ return {
         },
       })
 
-      -- 🔌 Mason-LSPConfig
+      -- This combines the base LSP capabilities with those provided by nvim-cmp.
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities()
+      )
+
+      -- 🔌 Mason-LSPConfig setup
+      -- This plugin acts as the bridge between mason (installer) and lspconfig (configurator).
       require("mason-lspconfig").setup({
+        -- ✅ CONSOLIDATED: All servers are now listed here.
+        -- This list ensures that Mason installs them, and the handler below configures them.
         ensure_installed = { "lua_ls", "bashls", "jdtls" },
         automatic_installation = true,
+        -- This handler is called for every server in `ensure_installed`.
+        -- It applies the same default configuration to each one.
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({
@@ -40,21 +52,9 @@ return {
         },
       })
 
-      -- ⚙️ Capabilities do nvim-cmp
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities()
-      )
+      -- The `mason-lspconfig` handler above now manages the setup for all servers.
 
-      -- 📦 Configuração dos LSPs
-      local lspconfig = require("lspconfig")
-      local servers = { "lua_ls", "bashls", "gleam", "ocamllsp" }
-      for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup({ capabilities = capabilities })
-      end
-
-      -- ⚡ Keymaps com autocmd
+      -- ⚡ Keymaps are set up once an LSP attaches to a buffer
       vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP actions",
         callback = function(event)
@@ -76,9 +76,8 @@ return {
         end,
       })
     end,
-
     keys = {
-      { "<leader>m", "<cmd>Mason<CR>", desc = "Opens Mason" }
+      { "<leader>m", "<cmd>Mason<CR>", desc = "Opens Mason" },
     },
   },
 }
