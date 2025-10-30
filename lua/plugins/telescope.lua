@@ -25,5 +25,21 @@ return {
       end,
       desc = 'Live Grep',
     },
+
+    {
+      '<leader>pd',
+      function()
+        require('telescope.builtin').lsp_document_symbols()
+      end,
+      desc = 'Find Symbols in Current File',
+    },
+
+    {
+      '<leader>pm',
+      function()
+        require('telescope.builtin').marks()
+      end,
+      desc = 'Find Marks Storaged',
+    },
   },
 }

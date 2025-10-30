@@ -42,6 +42,9 @@ local floaterminal = require("utils.floaterminal")
 vim.keymap.set("n", "<leader>tt", floaterminal.toggle, { desc = "Toggle floaterminal" })
 vim.keymap.set("t", "jk", "<c-\\><c-n>", { desc = "Exit terminal mode" })
 
+local popup_path = require("utils.popup-path")
+vim.keymap.set("n", "<A-l>", popup_path.toggle_filepath, { desc = "Toggle current file path" })
+
 -- New file
 vim.keymap.set("n", "<leader>nj", function()
   require("utils.java_file_creator").create_java_file()
