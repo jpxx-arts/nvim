@@ -45,6 +45,9 @@ return {
         -- It applies the same default configuration to each one.
         handlers = {
           function(server_name)
+            if server_name == "jdtls" then
+              return
+            end
             require("lspconfig")[server_name].setup({
               capabilities = capabilities,
             })
